@@ -157,10 +157,11 @@ public class FlyDog : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
 
+        Vector3 explosionPosition = other.transform.position;
+        explosionPosition.z = -1;
         if (other.gameObject.layer == 9) //Asteroids
         {
 
-            Vector3 explosionPosition = other.transform.position;
             Destroy(other.gameObject);
 
             if (GetDamage == false)
@@ -217,6 +218,11 @@ public class FlyDog : MonoBehaviour
                 StartCoroutine(waitFrameEndDamageFunction());
                 SoundManager.instance.PlaySound(SoundManager.instance.impact);
                 SoundManager.instance.PlaySound(SoundManager.instance.whimper);
+                //Particles
+                explosionParticle1.transform.position = explosionPosition;
+                explosionParticle1.Play();
+                explosionParticle2.transform.position = explosionPosition;
+                explosionParticle2.Play();
             }
         }
 
@@ -232,6 +238,11 @@ public class FlyDog : MonoBehaviour
                 StartCoroutine(waitFrameEndDamageFunction());
                 SoundManager.instance.PlaySound(SoundManager.instance.impact);
                 SoundManager.instance.PlaySound(SoundManager.instance.whimper);
+                //Particles
+                explosionParticle1.transform.position = explosionPosition;
+                explosionParticle1.Play();
+                explosionParticle2.transform.position = explosionPosition;
+                explosionParticle2.Play();
             }
 
         }
