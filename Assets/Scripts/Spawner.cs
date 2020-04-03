@@ -71,29 +71,79 @@ public class Spawner : MonoBehaviour
 
         if (Level == 6f)
         {
-            JunkMax = 60;
+            JunkMax = 65;
         }
 
         if (Level == 7f)
         {
-            JunkMax = 70;
+            JunkMax = 80;
         }
 
         if (Level == 8f)
         {
-            JunkMax = 80;
+            JunkMax = 95;
         }
 
         if (Level == 9f)
         {
-            JunkMax = 90;
+            JunkMax = 115;
         }
 
         if (Level == 10f)
         {
-            JunkMax = 100;
+            JunkMax = 135;
         }
 
+        if (Level == 11f)
+        {
+            JunkMax = 155;
+        }
+
+        if (Level == 12f)
+        {
+            JunkMax = 180;
+        }
+
+        if (Level == 13f)
+        {
+            JunkMax = 205;
+        }
+
+        if (Level == 14f)
+        {
+            JunkMax = 230;
+        }
+
+        if (Level == 15f)
+        {
+            JunkMax = 255;
+        }
+
+
+        if (Level == 16f)
+        {
+            JunkMax = 285;
+        }
+
+        if (Level == 17f)
+        {
+            JunkMax = 315;
+        }
+
+        if (Level == 18f)
+        {
+            JunkMax = 345;
+        }
+
+        if (Level == 19f)
+        {
+            JunkMax = 375;
+        }
+
+        if (Level == 20f)
+        {
+            JunkMax = 405;
+        }
 
         //HP Bones spawner level 1 (1-6)                                                            
         if (((ObjectSpawn >= 0) && (ObjectSpawn <= 7) && JunkCalc <= JunkMax))

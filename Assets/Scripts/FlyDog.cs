@@ -76,11 +76,11 @@ public class FlyDog : MonoBehaviour
         GetDamage = true;
 
         animator.Play("laika_death");
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
         transform.Rotate(0, 0, 1 * velocity /2);
         yield return new WaitForSeconds(1f);
-        rb.velocity = Vector2.down * velocity * 7;
-        yield return new WaitForSeconds(2f);
+        rb.velocity = Vector2.down * velocity * 8;
+        yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("EndMenuScene");
 
     }

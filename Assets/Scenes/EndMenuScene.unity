@@ -629,7 +629,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: You survived
+  m_Text: Your time is
 --- !u!222 &781599804
 CanvasRenderer:
   m_ObjectHideFlags: 0
