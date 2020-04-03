@@ -22,6 +22,8 @@ public class FlyDog : MonoBehaviour
 
     bool GetDamage = false;
 
+    bool LockMoving = false;
+
 
 
 
@@ -66,6 +68,16 @@ public class FlyDog : MonoBehaviour
         GetDamage = false;
     }
 
+    IEnumerator DeathToEndScreenFunction()
+    {
+        LockMoving = true;
+        GetDamage = true;
+        animator.Play("laika_death");
+
+        yield return new WaitForSeconds(4f);
+        SceneManager.LoadScene("EndMenuScene");
+
+    }
 
     void FixedUpdate()
     {
@@ -104,10 +116,10 @@ public class FlyDog : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-
-            //Jump
-            rb.velocity = Vector2.up * velocity;
-
+            if (LockMoving == false)
+            {
+                rb.velocity = Vector2.up * velocity;
+            }
         }
 
         if (health >= 3)
@@ -117,7 +129,8 @@ public class FlyDog : MonoBehaviour
         }
         if (health == 0 || health <= 0)
         {
-            SceneManager.LoadScene("EndMenuScene");
+            StartCoroutine(DeathToEndScreenFunction());
+            //SceneManager.LoadScene("EndMenuScene");
         }
 
     }
@@ -145,8 +158,9 @@ public class FlyDog : MonoBehaviour
 
             if (GetDamage == false)
             {
-                
-                StartCoroutine(waitFrameEndDamageFunction());
+                           
+            StartCoroutine(waitFrameEndDamageFunction());
+
             }
         }
 
@@ -155,7 +169,7 @@ public class FlyDog : MonoBehaviour
             
             //animator.Play("laika_hpgain");
             Destroy(other.gameObject);
-            //health += 1;
+
             StartCoroutine(waitFrameEndFunction());
 
         }
@@ -171,31 +185,62 @@ public class FlyDog : MonoBehaviour
         if (other.gameObject.layer == 12) //Deadman
         {
             Destroy(other.gameObject);
-            StartCoroutine(waitFrameEndDamageFunction());
+            if (GetDamage == false)
+            {
+
+                StartCoroutine(waitFrameEndDamageFunction());
+
+            }
         }
 
         if (other.gameObject.layer == 13) //Satellite
         {
             Destroy(other.gameObject);
-            StartCoroutine(waitFrameEndDamageFunction());
+
+            if (GetDamage == false)
+            {
+
+                StartCoroutine(waitFrameEndDamageFunction());
+
+            }
         }
 
         if (other.gameObject.layer == 14) //Planet
         {
             rb.velocity = Vector2.up * velocity;
-            StartCoroutine(waitFrameEndDamageFunction());
+
+            if (GetDamage == false)
+            {
+
+                StartCoroutine(waitFrameEndDamageFunction());
+
+            }
         }
 
         if (other.gameObject.layer == 30) //When you hit ceiling
         {
             rb.velocity = Vector2.down * velocity;
-            StartCoroutine(waitFrameEndDamageFunction());
+
+            if (GetDamage == false)
+            {
+
+                StartCoroutine(waitFrameEndDamageFunction());
+
+            }
         }
 
         if (other.gameObject.layer == 31) //When you fall on planet
-        { 
-            rb.velocity = Vector2.up * velocity;
-            StartCoroutine(waitFrameEndDamageFunction());
+        {
+            if (LockMoving == false)
+            {
+                rb.velocity = Vector2.up * velocity;
+            }
+            if (GetDamage == false)
+            {
+
+                StartCoroutine(waitFrameEndDamageFunction());
+
+            }
         }
 
     }
