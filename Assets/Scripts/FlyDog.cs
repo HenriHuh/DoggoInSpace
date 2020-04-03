@@ -79,6 +79,7 @@ public class FlyDog : MonoBehaviour
         yield return new WaitForSeconds(0.7f);
         transform.Rotate(0, 0, 1 * velocity /2);
         yield return new WaitForSeconds(1f);
+        SoundManager.instance.PlayDeath();
         rb.velocity = Vector2.down * velocity * 8;
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("EndMenuScene");
@@ -124,11 +125,12 @@ public class FlyDog : MonoBehaviour
         {
             if (LockMoving == false)
             {
+                SoundManager.instance.PlayBooster();
 
                 if (!isJumped)
                 {
-                    SoundManager.instance.PlaySound(SoundManager.instance.jump);
-                    StartCoroutine(JumpSound());
+                    isJumped = true;
+                    //SoundManager.instance.PlaySound(SoundManager.instance.jump);
                 }
                 rb.velocity = Vector2.up * velocity;
             }
@@ -142,6 +144,8 @@ public class FlyDog : MonoBehaviour
         else
         {
             //flyParticle.Stop();
+            isJumped = false;
+            SoundManager.instance.StopBooster();
             flyParticle.loop = true;
             flyParticle.Play();
         }
@@ -156,14 +160,6 @@ public class FlyDog : MonoBehaviour
             StartCoroutine(DeathToEndScreenFunction());
             //SceneManager.LoadScene("EndMenuScene");
         }
-
-    }
-
-    IEnumerator JumpSound()
-    {
-        isJumped = true;
-        yield return new WaitForSeconds(0.5f);
-        isJumped = false;
 
     }
 

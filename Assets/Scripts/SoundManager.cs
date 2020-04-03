@@ -10,7 +10,9 @@ public class SoundManager : MonoBehaviour
     //Audiosource
     AudioSource source;
     AudioSource music;
-
+    public AudioSource booster;
+    float vol;
+    bool dead;
     //Audio Clips
     public AudioClip
         jump,
@@ -19,7 +21,8 @@ public class SoundManager : MonoBehaviour
         happy,
         whimper,
         explosion,
-        health;
+        health,
+        lose;
 
 
     void Start()
@@ -29,6 +32,27 @@ public class SoundManager : MonoBehaviour
         source.volume = GameVar.volume;
         music.volume = GameVar.volume;
         instance = this;
+    }
+
+
+    public void PlayBooster()
+    {
+        booster.volume = GameVar.volume * 0.6f;
+    }
+
+    public void StopBooster()
+    {
+        booster.volume = 0;
+
+    }
+
+    public void PlayDeath()
+    {
+        if (!dead)
+        {
+            dead = true;
+            PlaySound(lose);
+        }
     }
 
     public void PlayEat()
