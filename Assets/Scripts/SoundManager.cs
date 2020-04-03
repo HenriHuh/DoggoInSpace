@@ -17,7 +17,7 @@ public class SoundManager : MonoBehaviour
         eat,
         happy,
         whimper,
-        eplosion,
+        explosion,
         health;
 
 

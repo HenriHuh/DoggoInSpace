@@ -118,6 +118,7 @@ public class FlyDog : MonoBehaviour
         {
             if (LockMoving == false)
             {
+                SoundManager.instance.PlaySound(SoundManager.instance.jump);
                 rb.velocity = Vector2.up * velocity;
             }
         }
@@ -154,19 +155,22 @@ public class FlyDog : MonoBehaviour
         if (other.gameObject.layer == 9) //Asteroids
         {
 
+
             Destroy(other.gameObject);
 
             if (GetDamage == false)
             {
-                           
-            StartCoroutine(waitFrameEndDamageFunction());
 
+                StartCoroutine(waitFrameEndDamageFunction());
+                SoundManager.instance.PlaySound(SoundManager.instance.explosion);
+                SoundManager.instance.PlaySound(SoundManager.instance.whimper);
             }
         }
 
         if (other.gameObject.layer == 10) //HP
         {
-            
+            SoundManager.instance.PlayEat();
+
             //animator.Play("laika_hpgain");
             Destroy(other.gameObject);
 
@@ -176,7 +180,8 @@ public class FlyDog : MonoBehaviour
 
         if (other.gameObject.layer == 11) //HP Max
         {
-            
+            SoundManager.instance.PlayEat();
+
             Destroy(other.gameObject);
             health += 1;
             StartCoroutine(waitFrameEndFunction());
@@ -184,53 +189,71 @@ public class FlyDog : MonoBehaviour
 
         if (other.gameObject.layer == 12) //Deadman
         {
+
+
+
             Destroy(other.gameObject);
             if (GetDamage == false)
             {
 
                 StartCoroutine(waitFrameEndDamageFunction());
-
+                SoundManager.instance.PlaySound(SoundManager.instance.impact);
+                SoundManager.instance.PlaySound(SoundManager.instance.whimper);
             }
         }
 
         if (other.gameObject.layer == 13) //Satellite
         {
+
+
             Destroy(other.gameObject);
 
             if (GetDamage == false)
             {
 
                 StartCoroutine(waitFrameEndDamageFunction());
-
+                SoundManager.instance.PlaySound(SoundManager.instance.impact);
+                SoundManager.instance.PlaySound(SoundManager.instance.whimper);
             }
+
         }
 
         if (other.gameObject.layer == 14) //Planet
         {
+
+
             rb.velocity = Vector2.up * velocity;
 
             if (GetDamage == false)
             {
 
                 StartCoroutine(waitFrameEndDamageFunction());
-
+                SoundManager.instance.PlaySound(SoundManager.instance.impact);
+                SoundManager.instance.PlaySound(SoundManager.instance.whimper);
             }
+
         }
 
         if (other.gameObject.layer == 30) //When you hit ceiling
         {
+
+
             rb.velocity = Vector2.down * velocity;
 
             if (GetDamage == false)
             {
 
                 StartCoroutine(waitFrameEndDamageFunction());
-
+                SoundManager.instance.PlaySound(SoundManager.instance.impact);
+                SoundManager.instance.PlaySound(SoundManager.instance.whimper);
             }
+
         }
 
         if (other.gameObject.layer == 31) //When you fall on planet
         {
+
+
             if (LockMoving == false)
             {
                 rb.velocity = Vector2.up * velocity;
@@ -240,6 +263,11 @@ public class FlyDog : MonoBehaviour
 
                 StartCoroutine(waitFrameEndDamageFunction());
 
+            }
+            if (GetDamage && !LockMoving)
+            {
+                SoundManager.instance.PlaySound(SoundManager.instance.impact);
+                SoundManager.instance.PlaySound(SoundManager.instance.whimper);
             }
         }
 
