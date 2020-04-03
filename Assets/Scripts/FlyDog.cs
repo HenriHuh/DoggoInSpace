@@ -25,6 +25,7 @@ public class FlyDog : MonoBehaviour
 
     bool LockMoving = false;
 
+    bool isJumped;
 
 
 
@@ -123,7 +124,11 @@ public class FlyDog : MonoBehaviour
         {
             if (LockMoving == false)
             {
-                SoundManager.instance.PlaySound(SoundManager.instance.jump);
+                if (!isJumped)
+                {
+                    SoundManager.instance.PlaySound(SoundManager.instance.jump);
+                    StartCoroutine(JumpSound());
+                }
                 rb.velocity = Vector2.up * velocity;
             }
         }
@@ -138,6 +143,14 @@ public class FlyDog : MonoBehaviour
             StartCoroutine(DeathToEndScreenFunction());
             //SceneManager.LoadScene("EndMenuScene");
         }
+
+    }
+
+    IEnumerator JumpSound()
+    {
+        isJumped = true;
+        yield return new WaitForSeconds(0.5f);
+        isJumped = false;
 
     }
 
