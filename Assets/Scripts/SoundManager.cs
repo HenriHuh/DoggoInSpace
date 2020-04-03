@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
 
     //Audiosource
     AudioSource source;
+    AudioSource music;
 
     //Audio Clips
     public AudioClip
@@ -24,6 +25,9 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         source = gameObject.GetComponent<AudioSource>();
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
+        source.volume = GameVar.volume;
+        music.volume = GameVar.volume;
         instance = this;
     }
 

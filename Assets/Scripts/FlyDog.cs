@@ -13,7 +13,7 @@ public class FlyDog : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
-    public ParticleSystem explosionParticle1, explosionParticle2;
+    public ParticleSystem explosionParticle1, explosionParticle2, flyParticle;
 
     public float velocity = 1;
     private Rigidbody2D rb;
@@ -25,6 +25,7 @@ public class FlyDog : MonoBehaviour
 
     bool LockMoving = false;
 
+    bool isJumped;
 
 
 
@@ -123,9 +124,26 @@ public class FlyDog : MonoBehaviour
         {
             if (LockMoving == false)
             {
-                SoundManager.instance.PlaySound(SoundManager.instance.jump);
+
+                if (!isJumped)
+                {
+                    SoundManager.instance.PlaySound(SoundManager.instance.jump);
+                    StartCoroutine(JumpSound());
+                }
                 rb.velocity = Vector2.up * velocity;
             }
+            else
+            {
+                // flyParticle.Stop();
+                flyParticle.loop = true;
+                flyParticle.Play();
+            }
+        }
+        else
+        {
+            //flyParticle.Stop();
+            flyParticle.loop = true;
+            flyParticle.Play();
         }
 
         if (health >= 3)
@@ -138,6 +156,14 @@ public class FlyDog : MonoBehaviour
             StartCoroutine(DeathToEndScreenFunction());
             //SceneManager.LoadScene("EndMenuScene");
         }
+
+    }
+
+    IEnumerator JumpSound()
+    {
+        isJumped = true;
+        yield return new WaitForSeconds(0.5f);
+        isJumped = false;
 
     }
 
