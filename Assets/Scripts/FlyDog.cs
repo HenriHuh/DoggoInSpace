@@ -73,7 +73,7 @@ public class FlyDog : MonoBehaviour
     IEnumerator DeathToEndScreenFunction()
     {
         LockMoving = true;
-        GetDamage = true;
+        //GetDamage = true;
 
         animator.Play("laika_death");
         yield return new WaitForSeconds(0.7f);
