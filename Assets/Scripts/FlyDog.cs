@@ -13,6 +13,7 @@ public class FlyDog : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    public ParticleSystem explosionParticle1, explosionParticle2;
 
     public float velocity = 1;
     private Rigidbody2D rb;
@@ -155,15 +156,22 @@ public class FlyDog : MonoBehaviour
         if (other.gameObject.layer == 9) //Asteroids
         {
 
-
+            Vector3 explosionPosition = other.transform.position;
             Destroy(other.gameObject);
 
             if (GetDamage == false)
             {
 
                 StartCoroutine(waitFrameEndDamageFunction());
+
                 SoundManager.instance.PlaySound(SoundManager.instance.explosion);
                 SoundManager.instance.PlaySound(SoundManager.instance.whimper);
+
+                //Particles
+                explosionParticle1.transform.position = explosionPosition;
+                explosionParticle1.Play();
+                explosionParticle2.transform.position = explosionPosition;
+                explosionParticle2.Play();
             }
         }
 
