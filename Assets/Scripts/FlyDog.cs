@@ -72,9 +72,13 @@ public class FlyDog : MonoBehaviour
     {
         LockMoving = true;
         GetDamage = true;
-        animator.Play("laika_death");
 
-        yield return new WaitForSeconds(4f);
+        animator.Play("laika_death");
+        yield return new WaitForSeconds(1f);
+        transform.Rotate(0, 0, 1 * velocity /2);
+        yield return new WaitForSeconds(1f);
+        rb.velocity = Vector2.down * velocity * 7;
+        yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("EndMenuScene");
 
     }
@@ -143,7 +147,7 @@ public class FlyDog : MonoBehaviour
 
         //Bounce back (NEW)
 
-        rb.velocity = Vector2.down * velocity;
+        rb.velocity = Vector2.up * velocity;
 
         health -= 1;
     }
@@ -169,8 +173,10 @@ public class FlyDog : MonoBehaviour
             
             //animator.Play("laika_hpgain");
             Destroy(other.gameObject);
-
-            StartCoroutine(waitFrameEndFunction());
+            if (LockMoving == false)
+            {
+                StartCoroutine(waitFrameEndFunction());
+            }
 
         }
 
@@ -178,8 +184,12 @@ public class FlyDog : MonoBehaviour
         {
             
             Destroy(other.gameObject);
-            health += 1;
-            StartCoroutine(waitFrameEndFunction());
+
+            if (LockMoving == false)
+            {
+                health += 1;
+                StartCoroutine(waitFrameEndFunction());
+            }
         }
 
         if (other.gameObject.layer == 12) //Deadman
